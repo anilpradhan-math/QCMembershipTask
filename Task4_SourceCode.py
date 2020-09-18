@@ -26,6 +26,10 @@ print ('\nLowest Eigen Value:', min(np.linalg.eig(H)[0]))
 
 '''
     Pauli Matrix Representation: Finding the Coefficient
+    
+        H = a*II + b*XX + c*YY + d*ZZ
+        
+        [a,b,c,d] <- PauliCoeff(H)
 '''
 
 def PauliCoeff(M):
@@ -53,6 +57,9 @@ def PauliCoeff(M):
 
 '''
     Quantum Circuits:
+    
+    |00> -- [Anstoz]--- [Quatum Mdule]---(Measurement)
+    
 '''
 
 def quantum_circuit(parameters, Pauli_Matrix):
@@ -60,6 +67,7 @@ def quantum_circuit(parameters, Pauli_Matrix):
     qc = QuantumCircuit(2,2)
 
     #Anstoz
+    #   |00>--[HI]--[CNOT]---[RX RX]---
     qc.h(0)
     qc.cx(0,1)
     qc.rx(parameters[0],0)
@@ -105,7 +113,7 @@ def expectation_value(parameters, Pauli_Matrix):
     elif Pauli_Matrix == 'YY':
         circuit = quantum_circuit(parameters, 'YY')
     else:
-        raise ValueError('Not valid input for measurement: input should be "I" or "X" or "Z" or "Y"')
+        raise ValueError('Not valid input for measurement: input should be "II" or "XX" or "ZZ" or "YY"')
     
     shots = 8192
     backend = BasicAer.get_backend('qasm_simulator')
@@ -121,8 +129,6 @@ def expectation_value(parameters, Pauli_Matrix):
         if measure_result == '11' or measure_result == '00':
             sign = +1
         expectation_value += sign * counts[measure_result] / shots
-
-    #print ('Expt Value: ',expectation_value)
         
     return expectation_value
 
