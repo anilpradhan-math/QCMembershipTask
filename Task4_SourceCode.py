@@ -158,7 +158,7 @@ print ('H = ', C[0],' II + ', C[1],' XX + ', C[2],' YY + ', C[3],' ZZ')
 
 H_Pauli = {'II':C[0], 'XX':C[1], 'YY':C[2], 'ZZ':C[3]}
 
-H_Pauli = {'II':0.5, 'XX':-0.5, 'YY':-0.5, 'ZZ':0.5}
+#H_Pauli = {'II':0.5, 'XX':-0.5, 'YY':-0.5, 'ZZ':0.5}
 
 parameters_array = np.array([2*np.pi, 2*np.pi])
 
@@ -168,15 +168,4 @@ print('Lowest Eigen Value (Estimated ground state energy from VQE algorithm): {}
 
 print ('\nLowest Eigen Value (Using Classical Method):', min(np.linalg.eig(H)[0]))
 
-
-
-
-
-
-
-
-
-
-
-    
 
